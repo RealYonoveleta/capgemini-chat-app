@@ -1,0 +1,39 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <section>
+    <label for="email">Email</label>
+    <input type="email" id="email" formControlName="email" />
+
+    <app-form-error
+      [control]="f.email"
+      error="required"
+      message="Email is required"
+    ></app-form-error>
+
+    <app-form-error
+      [control]="f.email"
+      error="email"
+      message="Must have valid email format"
+    ></app-form-error>
+  </section>
+
+  <section>
+    <label for="password">Password</label>
+    <input type="password" id="password" formControlName="password" />
+
+    <app-form-error
+      [control]="f.password"
+      error="required"
+      message="Password is required"
+    ></app-form-error>
+
+    <app-form-error
+      [control]="f.password"
+      error="minlength"
+      message="Password must be at least {{
+        f.password.errors?.['minlength']?.requiredLength
+      }} characters"
+    ></app-form-error>
+  </section>
+
+  <button type="submit">Log in</button>
+</form>

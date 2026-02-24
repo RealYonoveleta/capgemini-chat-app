@@ -1,0 +1,6 @@
+@use 'colors';
+
+:host {
+    display: block;
+    color: colors.$error-color;
+}
