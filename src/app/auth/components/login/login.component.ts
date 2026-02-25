@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormErrorComponent } from '../../../shared/form-error/form-error.component';
-import { AuthService } from '../../../service/firebase/auth.service';
+import { AuthService } from '../../../core/services/firebase/auth.service';
 
 @Component({
   selector: 'app-login.component',

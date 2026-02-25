@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { fieldsMatch } from '../../../shared/validators/fields-match';
+import { fieldsMatch } from '../../../core/validators/fields-match';
 import { FormErrorComponent } from '../../../shared/form-error/form-error.component';
+import { AuthService } from '../../../core/services/firebase/auth.service';
 
 @Component({
   selector: 'app-signup.component',
@@ -11,6 +12,7 @@ import { FormErrorComponent } from '../../../shared/form-error/form-error.compon
 })
 export class SignupComponent {
   private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
 
   signupForm = this.fb.nonNullable.group(
     {
@@ -32,6 +34,7 @@ export class SignupComponent {
   onSubmit() {
     if (!this.signupForm.valid) return;
 
-    console.log(this.signupForm.value);
+    const { email, name, surname, password } = this.signupForm.getRawValue();
+    this.authService.signUp(email, password, name, surname);
   }
 }

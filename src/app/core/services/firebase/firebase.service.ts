@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FirebaseApp, initializeApp } from 'firebase/app';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../../environments/environment.development';
 import { Auth, getAuth } from 'firebase/auth';
 import { Firestore, getFirestore } from 'firebase/firestore';
 

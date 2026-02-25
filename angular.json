@@ -34,7 +34,7 @@
               "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/app/shared/styles"]
+              "includePaths": ["src/styles"]
             }
           },
           "configurations": {
