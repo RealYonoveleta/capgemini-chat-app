@@ -7,23 +7,12 @@ import { ToastController } from '@ionic/angular';
 export class NotificationService {
   private toastController = inject(ToastController);
 
-  async showError(message: string) {
+  async showToast(message: string, isError: boolean ) {
     const toast = await this.toastController.create({
       message,
       duration: 5000,
       position: 'top',
-      color: 'danger',
-    });
-
-    await toast.present();
-  }
-
-  async showSuccess(message: string) {
-    const toast = await this.toastController.create({
-      message,
-      duration: 5000,
-      position: 'top',
-      color: 'success',
+      color: isError ?  'danger' : 'success',
     });
 
     await toast.present();
