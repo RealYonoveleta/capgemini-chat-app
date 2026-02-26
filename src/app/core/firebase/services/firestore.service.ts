@@ -7,5 +7,6 @@ import { FirebaseService } from './firebase.service';
 export class FirestoreService {
   
   private firebaseService = inject(FirebaseService);
+  firestore = this.firebaseService.firestore;
 
 }
