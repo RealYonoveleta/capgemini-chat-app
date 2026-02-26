@@ -1,0 +1,43 @@
+@use 'colors';
+
+$border-radius: 20px;
+
+:host {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 80px 1fr;
+  height: 100vh;
+  background-color: colors.$app-background;
+  box-sizing: border-box;
+  padding: 20px;
+
+  grid-template-areas:
+    'account header'
+    'list view';
+}
+
+app-chat-list,
+app-account-panel {
+  color: colors.$secondary-text;
+}
+
+app-account-panel {
+  grid-area: account;
+}
+
+app-chat-list {
+  grid-area: list;
+}
+
+app-chat-header {
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  background-color: colors.$secondary-bg;
+}
+
+app-chat-view {
+  grid-area: view;
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+  background-color: colors.$tertiary-bg;
+}
