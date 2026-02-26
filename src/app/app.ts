@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { AuthService } from './core/auth/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,17 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App {}
+export class App {
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
+  constructor() {
+    this.authService.user$.subscribe((user) => {
+      if (user) {
+        this.router.navigate(['/home']);
+      } else {
+        this.router.navigate(['/']);
+      }
+    });
+  }
+}

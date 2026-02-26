@@ -1,16 +1,18 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
   updateProfile,
   User,
 } from 'firebase/auth';
+import { BehaviorSubject } from 'rxjs';
+import { UserService } from '../../../user/services/user.service';
 import { FirebaseService } from '../../firebase/services/firebase.service';
 import { FIREBASE_AUTH_ERROR_MAP } from '../auth-error.map';
-import { UserService } from '../../../user/services/user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -21,13 +23,21 @@ export class AuthService {
 
   private userService = inject(UserService);
 
-  user = signal<User | null>(null);
+  private user = new BehaviorSubject<User | null | undefined>(undefined);
+  user$ = this.user.asObservable();
 
   constructor() {
     onAuthStateChanged(this.auth, async (user) => {
       await user?.reload();
-      this.user.set(user);
+      this.user.next(user);
     });
+  }
+
+  private customError(firebaseErrorCode: string) {
+    const errorMessage =
+      FIREBASE_AUTH_ERROR_MAP[firebaseErrorCode] || 'An unexpected error has occurred';
+
+    return new Error(errorMessage);
   }
 
   async signUp(email: string, password: string, name: string, surname: string) {
@@ -38,7 +48,7 @@ export class AuthService {
         displayName: `${name} ${surname}`,
       });
 
-      await this.userService.createUser(user.uid, {email, name, surname});
+      await this.userService.createUser(user.uid, { email, name, surname });
     } catch (err: any) {
       throw this.customError(err.code);
     }
@@ -60,10 +70,7 @@ export class AuthService {
     }
   }
 
-  private customError(firebaseErrorCode: string) {
-    const errorMessage =
-      FIREBASE_AUTH_ERROR_MAP[firebaseErrorCode] || 'An unexpected error has occurred';
-
-    return new Error(errorMessage);
+  async signOut() {
+    await signOut(this.auth);
   }
 }

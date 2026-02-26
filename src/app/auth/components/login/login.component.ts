@@ -16,7 +16,6 @@ export class LoginComponent {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private notificationService = inject(NotificationService);
-  private router = inject(Router);
 
   loginForm = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
@@ -33,8 +32,7 @@ export class LoginComponent {
     try {
       const { email, password } = this.loginForm.getRawValue();
       await this.authService.signIn(email, password);
-      this.notificationService.showSuccess("Logged in successfully");
-      this.router.navigate(['/home']);
+      this.notificationService.showSuccess('Logged in successfully');
     } catch (err: any) {
       this.notificationService.showError(err.message);
     }
@@ -43,8 +41,7 @@ export class LoginComponent {
   async loginWithGoogle() {
     try {
       await this.authService.signInWithGoogle();
-      this.notificationService.showSuccess("Logged in with Google successfully");
-      this.router.navigate(['/home']);
+      this.notificationService.showSuccess('Logged in with Google successfully');
     } catch (err: any) {
       this.notificationService.showError(err.message);
     }

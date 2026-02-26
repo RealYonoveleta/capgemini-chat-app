@@ -1,12 +1,19 @@
-import { Component, computed, effect, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { IonButton } from '@ionic/angular/standalone';
 import { AuthService } from '../../../core/auth/services/auth.service';
+import { Router } from '@angular/router';
+import { first, tap } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  imports: [IonButton],
 })
 export class HeaderComponent {
-  user = inject(AuthService).user;
-  displayName = computed(() => this.user()?.displayName);
+  private authService = inject(AuthService);
+
+  async logout() {
+    await this.authService.signOut();
+  }
 }
