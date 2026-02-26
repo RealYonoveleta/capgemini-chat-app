@@ -42,10 +42,10 @@ export class SignupComponent {
     try {
       const { email, name, surname, password } = this.signupForm.getRawValue();
       await this.authService.signUp(email, password, name, surname);
-      this.notificationService.showSuccess("Successfully signed up");
+      this.notificationService.showToast("Successfully signed up");
       this.router.navigate(['/home']);
     } catch (err: any) {
-      this.notificationService.showError(err.message);
+      this.notificationService.showToast(err.message);
     }
   }
 }

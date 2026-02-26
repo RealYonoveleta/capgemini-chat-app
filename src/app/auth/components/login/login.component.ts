@@ -32,18 +32,18 @@ export class LoginComponent {
     try {
       const { email, password } = this.loginForm.getRawValue();
       await this.authService.signIn(email, password);
-      this.notificationService.showSuccess('Logged in successfully');
+      this.notificationService.showToast('Logged in successfully');
     } catch (err: any) {
-      this.notificationService.showError(err.message);
+      this.notificationService.showToast(err.message, true);
     }
   }
 
   async loginWithGoogle() {
     try {
       await this.authService.signInWithGoogle();
-      this.notificationService.showSuccess('Logged in with Google successfully');
+      this.notificationService.showToast('Logged in with Google successfully');
     } catch (err: any) {
-      this.notificationService.showError(err.message);
+      this.notificationService.showToast(err.message, true);
     }
   }
 }

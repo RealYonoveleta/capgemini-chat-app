@@ -7,7 +7,7 @@ import { ToastController } from '@ionic/angular';
 export class NotificationService {
   private toastController = inject(ToastController);
 
-  async showToast(message: string, isError: boolean ) {
+  async showToast(message: string, isError: boolean = false) {
     const toast = await this.toastController.create({
       message,
       duration: 5000,

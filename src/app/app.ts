@@ -16,9 +16,10 @@ export class App {
     this.authService.user$.subscribe((user) => {
       if (user) {
         this.router.navigate(['/home']);
-      } else {
-        this.router.navigate(['/']);
+        return;
       }
+
+      this.router.navigate(['/']);
     });
   }
 }
