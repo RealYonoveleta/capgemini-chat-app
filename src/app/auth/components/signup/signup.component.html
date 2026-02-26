@@ -12,13 +12,13 @@
     />
 
     <app-form-error
-      [control]="f.email"
+      [control]="formControls.email"
       error="required"
       message="Email is required"
     ></app-form-error>
 
     <app-form-error
-      [control]="f.email"
+      [control]="formControls.email"
       error="email"
       message="Must have valid email format"
     ></app-form-error>
@@ -34,7 +34,11 @@
       fill="outline"
     />
 
-    <app-form-error [control]="f.name" error="required" message="Name is required"></app-form-error>
+    <app-form-error
+      [control]="formControls.name"
+      error="required"
+      message="Name is required"
+    ></app-form-error>
   </section>
 
   <section>
@@ -59,16 +63,16 @@
     />
 
     <app-form-error
-      [control]="f.password"
+      [control]="formControls.password"
       error="required"
       message="Password is required"
     ></app-form-error>
 
     <app-form-error
-      [control]="f.password"
+      [control]="formControls.password"
       error="minlength"
       message="Password must be at least {{
-        f.password.errors?.['minlength']?.requiredLength
+        formControls.password.errors?.['minlength']?.requiredLength
       }} characters"
     ></app-form-error>
   </section>
@@ -84,13 +88,13 @@
     />
 
     <app-form-error
-      [control]="f.confirmPassword"
+      [control]="formControls.confirmPassword"
       error="required"
       message="Confirm password is required"
     ></app-form-error>
 
     <app-form-error
-      [control]="f.confirmPassword"
+      [control]="formControls.confirmPassword"
       error="mismatch"
       message="Confirm password must be equal to password"
     ></app-form-error>

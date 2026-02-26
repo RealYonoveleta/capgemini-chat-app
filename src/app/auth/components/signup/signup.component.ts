@@ -32,7 +32,7 @@ export class SignupComponent {
     },
   );
 
-  get f() {
+  get formControls() {
     return this.signupForm.controls;
   }
 

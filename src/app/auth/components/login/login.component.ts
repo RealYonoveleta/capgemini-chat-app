@@ -22,7 +22,7 @@ export class LoginComponent {
     password: ['', [Validators.required, Validators.minLength(8)]],
   });
 
-  get f() {
+  get formControls() {
     return this.loginForm.controls;
   }
 
