@@ -6,6 +6,7 @@ import { AuthService } from '../../../core/auth/services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { NotificationService } from '../../../shared/services/notification.service';
+import { User } from '../../../model/user';
 
 @Component({
   selector: 'app-signup.component',
@@ -40,9 +41,16 @@ export class SignupComponent {
     if (!this.signupForm.valid) return;
 
     try {
-      const { email, name, surname, password } = this.signupForm.getRawValue();
-      await this.authService.signUp(email, password, name, surname);
-      this.notificationService.showToast("Successfully signed up");
+      const formValue = this.signupForm.getRawValue();
+
+      const user: User = {
+        email: formValue.email,
+        name: formValue.name,
+        surname: formValue.surname,
+      };
+
+      await this.authService.signUp(user, formValue.password);
+      this.notificationService.showToast('Successfully signed up');
       this.router.navigate(['/home']);
     } catch (err: any) {
       this.notificationService.showToast(err.message);

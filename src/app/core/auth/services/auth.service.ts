@@ -7,12 +7,13 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
-  User,
+  User as FirebaseUser,
 } from 'firebase/auth';
 import { BehaviorSubject } from 'rxjs';
 import { UserService } from '../../../user/services/user.service';
 import { FirebaseService } from '../../firebase/services/firebase.service';
 import { FIREBASE_AUTH_ERROR_MAP } from '../auth-error.map';
+import { User } from '../../../model/user';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,7 @@ export class AuthService {
 
   private userService = inject(UserService);
 
-  private user = new BehaviorSubject<User | null | undefined>(undefined);
+  private user = new BehaviorSubject<FirebaseUser | null | undefined>(undefined);
   user$ = this.user.asObservable();
 
   constructor() {
@@ -40,15 +41,15 @@ export class AuthService {
     return new Error(errorMessage);
   }
 
-  async signUp(email: string, password: string, name: string, surname: string) {
+  async signUp(user: User, password: string) {
     try {
-      const credential = await createUserWithEmailAndPassword(this.auth, email, password);
-      const user = credential.user;
-      await updateProfile(user, {
-        displayName: `${name} ${surname}`,
+      const credential = await createUserWithEmailAndPassword(this.auth, user.email, password);
+      const firebaseUser = credential.user;
+      await updateProfile(firebaseUser, {
+        displayName: `${user.name} ${user.surname}`,
       });
 
-      await this.userService.createUser(user.uid, { email, name, surname });
+      await this.userService.createUser(firebaseUser.uid, user);
     } catch (err: any) {
       throw this.customError(err.code);
     }
