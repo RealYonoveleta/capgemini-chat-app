@@ -4,5 +4,5 @@ export interface Chat {
   title: string;
   participants: string[];
   lastMessage: string;
-  updateAt: Timestamp;
+  updatedAt: Timestamp;
 }

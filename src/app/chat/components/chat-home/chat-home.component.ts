@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ChatHeaderComponent } from '../chat-header/chat-header.component';
 import { ChatListComponent } from '../chat-list/chat-list.component';
 import { ChatViewComponent } from '../chat-view/chat-view.component';
-import { AccountPanelComponent } from "../account-panel/account-panel.component";
+import { AccountPanelComponent } from '../account-panel/account-panel.component';
+import { ChatService } from '../../services/chat.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-chat-home',
@@ -10,4 +12,8 @@ import { AccountPanelComponent } from "../account-panel/account-panel.component"
   styleUrls: ['./chat-home.component.scss'],
   imports: [ChatHeaderComponent, ChatListComponent, ChatViewComponent, AccountPanelComponent],
 })
-export class ChatHomeComponent {}
+export class ChatHomeComponent {
+  private chatService = inject(ChatService);
+
+  chat = toSignal(this.chatService.chat$, { initialValue: null });
+}

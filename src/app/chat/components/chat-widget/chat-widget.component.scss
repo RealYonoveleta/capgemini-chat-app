@@ -1,0 +1,5 @@
+@use 'colors';
+
+:host {
+    color: colors.$secondary-text;
+}

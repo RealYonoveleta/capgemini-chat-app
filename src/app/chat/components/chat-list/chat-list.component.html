@@ -1,3 +1,9 @@
-<p>
-  chat-list works!
-</p>
+<ion-content>
+  <ion-list id="chat-list">
+    @for (chat of chats(); track chat) {
+      <ion-item button class="chat-item">
+        <app-chat-widget [chat]="chat"></app-chat-widget>
+      </ion-item>
+    }
+  </ion-list>
+</ion-content>

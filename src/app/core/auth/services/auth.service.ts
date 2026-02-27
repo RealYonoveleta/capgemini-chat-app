@@ -45,6 +45,7 @@ export class AuthService {
     try {
       const credential = await createUserWithEmailAndPassword(this.auth, user.email, password);
       const firebaseUser = credential.user;
+
       await updateProfile(firebaseUser, {
         displayName: `${user.name} ${user.surname}`,
       });
