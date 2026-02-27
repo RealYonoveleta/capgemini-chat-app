@@ -1,0 +1,62 @@
+@use 'colors';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: colors.$app-background;
+  height: 100vh;
+  padding: 50px;
+  box-sizing: border-box;
+}
+
+form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background-color: colors.$tertiary-bg;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 50px;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+form::-webkit-scrollbar {
+  width: 6px;
+}
+
+form::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+form::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+form::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+form h2 {
+  margin: 0;
+  font-size: 2em;
+}
+
+form section {
+  display: flex;
+  flex-direction: column;
+  width: min(60%, 600px);
+}
+
+.error {
+  color: colors.$error-color;
+  font-weight: 600;
+}
+
+.text-center {
+  text-align: center;
+}

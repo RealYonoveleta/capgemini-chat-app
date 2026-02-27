@@ -1,0 +1,66 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <h2>Welcome to Angular chat!</h2>
+
+  <section>
+    <ion-input
+      label="Email"
+      labelPlacement="floating"
+      type="email"
+      id="email"
+      formControlName="email"
+      placeholder="example@gmail.com"
+      fill="outline"
+    />
+
+    <app-form-error
+      [control]="formControls.email"
+      error="required"
+      message="Email is required"
+    ></app-form-error>
+
+    <app-form-error
+      [control]="formControls.email"
+      error="email"
+      message="Must have valid email format"
+    ></app-form-error>
+  </section>
+
+  <section>
+    <ion-input
+      label="Password"
+      labelPlacement="floating"
+      type="password"
+      id="password"
+      formControlName="password"
+      placeholder="Enter password"
+      fill="outline"
+    />
+
+    <app-form-error
+      [control]="formControls.password"
+      error="required"
+      message="Password is required"
+    ></app-form-error>
+
+    <app-form-error
+      [control]="formControls.password"
+      error="minlength"
+      message="Password must be at least {{
+        formControls.password.errors?.['minlength']?.requiredLength
+      }} characters"
+    ></app-form-error>
+  </section>
+
+  <ion-button type="submit">Sign in</ion-button>
+
+  <section>
+    <ion-button (click)="loginWithGoogle()" class="google-btn">
+      <ion-icon src="assets/icons/google.svg" slot="start" size="large"></ion-icon>
+      Sign in with Google
+    </ion-button>
+  </section>
+
+  <section>
+    <span class="text-center">Don't have an account? <a routerLink="/auth/signup">Sign Up</a></span>
+  </section>
+</form>

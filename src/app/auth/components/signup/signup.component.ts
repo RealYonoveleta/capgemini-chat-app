@@ -1,0 +1,59 @@
+import { Component, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { fieldsMatch } from '../../../core/validators/fields-match';
+import { FormErrorComponent } from '../../../shared/form-error/form-error.component';
+import { AuthService } from '../../../core/auth/services/auth.service';
+import { Router, RouterLink } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { NotificationService } from '../../../shared/services/notification.service';
+import { User } from '../../../model/user';
+
+@Component({
+  selector: 'app-signup.component',
+  imports: [ReactiveFormsModule, FormErrorComponent, RouterLink, IonicModule],
+  templateUrl: './signup.component.html',
+  styleUrl: './signup.component.scss',
+})
+export class SignupComponent {
+  private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
+  private notificationService = inject(NotificationService);
+  private router = inject(Router);
+
+  signupForm = this.fb.nonNullable.group(
+    {
+      email: ['', [Validators.required, Validators.email]],
+      name: ['', [Validators.required]],
+      surname: [''],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required]],
+    },
+    {
+      validators: fieldsMatch('password', 'confirmPassword'),
+    },
+  );
+
+  get formControls() {
+    return this.signupForm.controls;
+  }
+
+  async onSubmit() {
+    if (!this.signupForm.valid) return;
+
+    try {
+      const formValue = this.signupForm.getRawValue();
+
+      const user: User = {
+        email: formValue.email,
+        name: formValue.name,
+        surname: formValue.surname,
+      };
+
+      await this.authService.signUp(user, formValue.password);
+      this.notificationService.showToast('Successfully signed up');
+      this.router.navigate(['/home']);
+    } catch (err: any) {
+      this.notificationService.showToast(err.message);
+    }
+  }
+}
