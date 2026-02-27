@@ -5,10 +5,11 @@ import { routes } from './app.routes';
 import { provideIonicAngular } from '@ionic/angular/standalone';
 
 import { addIcons } from 'ionicons';
-import { logOutOutline } from 'ionicons/icons';
+import { logOutOutline, addCircleOutline } from 'ionicons/icons';
 
 addIcons({
   logOutOutline,
+  addCircleOutline,
 });
 
 export const appConfig: ApplicationConfig = {

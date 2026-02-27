@@ -1,4 +1,6 @@
 <app-account-panel></app-account-panel>
 <app-chat-list></app-chat-list>
 <app-chat-header [chat]="chat()"></app-chat-header>
-<app-chat-view></app-chat-view>
+<ion-content class="main-view">
+    <router-outlet></router-outlet>
+</ion-content>

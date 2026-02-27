@@ -35,7 +35,7 @@ app-chat-header {
   background-color: colors.$secondary-bg;
 }
 
-app-chat-view {
+.main-view {
   grid-area: view;
   border-bottom-left-radius: $border-radius;
   border-bottom-right-radius: $border-radius;

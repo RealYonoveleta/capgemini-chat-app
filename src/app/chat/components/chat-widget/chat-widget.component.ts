@@ -16,6 +16,7 @@ export class ChatWidgetComponent {
   chat = input<Chat>();
 
   title = computed(() => this.chat()?.title);
+  lastMessage = computed(() => this.chat()?.lastMessage);
 
   onSelect() {
     this.chatService.setActiveChat(this.chat()!);

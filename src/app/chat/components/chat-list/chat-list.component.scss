@@ -1,7 +1,14 @@
 @use 'colors';
 
+:host {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
 ion-content {
   --background: colors.$app-background;
+  flex: 1;
 
   &::part(scroll) {
     &::-webkit-scrollbar {
@@ -40,4 +47,12 @@ ion-content {
 
 app-chat-widget {
   width: 100%;
+}
+
+app-chat-list-actions {
+  height: 60px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
