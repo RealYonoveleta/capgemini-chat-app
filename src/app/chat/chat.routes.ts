@@ -8,13 +8,17 @@ const chatRoutes: Routes = [
     component: CreateChatComponent,
   },
   {
-    path: '',
+    path: ':chatId',
     component: ChatViewComponent,
+  },
+  {
+    path: '',
+    redirectTo: 'create-chat',
     pathMatch: 'full',
   },
   {
     path: '**',
-    redirectTo: '/',
+    redirectTo: 'create-chat',
   },
 ];
 

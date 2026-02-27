@@ -1,0 +1,16 @@
+@use 'colors';
+
+$border-radius: 20px;
+
+:host {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+app-chat-header {
+  height: 80px;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  background-color: colors.$secondary-bg;
+}

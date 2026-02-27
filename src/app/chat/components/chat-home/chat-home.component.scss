@@ -1,7 +1,5 @@
 @use 'colors';
 
-$border-radius: 20px;
-
 :host {
   display: grid;
   grid-template-columns: 300px 1fr;
@@ -12,7 +10,7 @@ $border-radius: 20px;
   padding: 20px;
 
   grid-template-areas:
-    'account header'
+    'account view'
     'list view';
 }
 
@@ -29,15 +27,8 @@ app-chat-list {
   grid-area: list;
 }
 
-app-chat-header {
-  border-top-left-radius: $border-radius;
-  border-top-right-radius: $border-radius;
-  background-color: colors.$secondary-bg;
-}
-
 .main-view {
   grid-area: view;
-  border-bottom-left-radius: $border-radius;
-  border-bottom-right-radius: $border-radius;
+  border-radius: 20px;
   background-color: colors.$tertiary-bg;
 }
